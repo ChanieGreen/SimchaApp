@@ -3,28 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Simchas.Data;
+using Simchas.Models;
 
 namespace Simchas.Controllers
 {
     public class HomeController : Controller
     {
+        private DbManager _mgr = new DbManager(Properties.Settings.Default.ConStr);
+
         public ActionResult Index()
         {
-            return View();
+            SimchasViewModel vm = new SimchasViewModel();
+            vm.Simchas = _mgr.GetSimchas();
+            vm.Contributors = _mgr.GetContributorCount();
+            return View(vm);
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult AddSimcha(Simcha simcha)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            _mgr.AddSimcha(simcha);
+            return Redirect("/home/index");
         }
 
-        public ActionResult Contact()
+        public ActionResult Contributions(int? simchaId)
         {
-            ViewBag.Message = "Your contact page.";
+            if (!simchaId.HasValue)
+            {
+                return Redirect("/");
+            }
+            ContributionsViewModel vm = new ContributionsViewModel();
+            vm.Simcha = _mgr.GetSimcha(simchaId.Value);
+            vm.Contributions = _mgr.GetContributionsForSimcha(simchaId.Value);
+            return View(vm);
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult Contributions(IEnumerable<IncludeInContribution> contributions, int simchaId)
+        {
+            _mgr.UpdateSimchaContributions(contributions, simchaId);
+            return Redirect("/");
         }
     }
 }

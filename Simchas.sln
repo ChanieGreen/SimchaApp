@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simchas", "Simchas\Simchas.csproj", "{62F03C02-D985-487E-B8EA-CF11DA5364B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simchas.Data", "Simchas.Data\Simchas.Data.csproj", "{0067CDFD-E363-4382-A96D-4CFC86B11C4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{62F03C02-D985-487E-B8EA-CF11DA5364B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62F03C02-D985-487E-B8EA-CF11DA5364B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62F03C02-D985-487E-B8EA-CF11DA5364B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0067CDFD-E363-4382-A96D-4CFC86B11C4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0067CDFD-E363-4382-A96D-4CFC86B11C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0067CDFD-E363-4382-A96D-4CFC86B11C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0067CDFD-E363-4382-A96D-4CFC86B11C4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

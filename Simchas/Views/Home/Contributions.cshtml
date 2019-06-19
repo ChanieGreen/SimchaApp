@@ -1,0 +1,55 @@
+﻿@using Simchas.Models
+@model ContributionsViewModel
+
+
+<div style="text-align:center">
+    <h2>Contributors for @Model.Simcha.SimchaName</h2>
+</div>
+<form method="post" action="/home/contributions">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th style="text-align:center">Contribute</th>
+            <th style="text-align:center">Name</th>
+            <th style="text-align:center">Balance</th>
+            <th style="text-align:center">Always Include</th>
+            <th style="text-align:center">Amount</th>
+        </tr>
+        @{ int i = 0;}
+        @foreach (var c in Model.Contributions)
+        {
+            <tr>
+                <td style="text-align:center">
+                    @if (c.AlwaysInclude || c.Amount != null)
+                    {
+                        <input type="checkbox" name="contributions[@i].Include" value="true" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="contributions[@i].Include" value="true" />
+                    }
+
+                </td>
+                <td style="text-align:center">@c.FirstName @c.LastName</td>
+                <td style="text-align:center">@c.Balance.ToString("C")</td>
+                <td style="text-align:center">
+                    @if (c.AlwaysInclude)
+                    {
+                        <span class="glyphicon glyphicon-ok"></span>
+                    }
+                </td>
+                <td style="text-align:center">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control input-sm" name="contributions[@i].Amount" placeholder="Amount" value="5" />
+                            <input type="hidden" name="contributions[@i].ContributorId" value="@c.ContributorId" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            { i++; }
+        }
+    </table>
+    <input type="hidden" name="simchaId" value="@Model.Simcha.Id" />
+    <button class="btn btn-info">Update</button>
+</form>
+
